@@ -1,65 +1,43 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+import React from 'react'
+import Link from 'next/link'
+import Navbar from './components/Navbar'
+ function index({data}) {
+  const cardArticle= data.map(result=>(
+    <div className="col-md-3" key={result._id}>
+        <div className="card mb-4 shadow-sm">
+        <img className="bd-placeholder-img card-img-top" src={""+result.img_article} alt="" width="100%" height={225} />
+          <div className="card-body">
+            <h4>{result.title}</h4>
+              <p className="card-text">{result.content} This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <div className="d-flex justify-content-between align-items-center">
+              <small className="text-muted">{result.date_time}</small>
+              <Link href={"/article/"+result._id} className="btn btn-sm btn-outline-dark"><a>View</a></Link>
+            </div>
+          </div>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+      </div>
+  ))
+  return (
+    <div >
+      <Navbar />
+      <div className="album py-5">
+        <div className="container">
+          <div className="row">
+            {cardArticle}
+          </div>
+        </div>
+      </div>
+      
+  </div>
   )
+  
 }
+export async function getStaticProps() {
+  const result = await fetch("http://localhost:3001/admin/article")
+  const data = await result.json()
+  return {
+    props: {data
+    },
+  }
+}
+export default index

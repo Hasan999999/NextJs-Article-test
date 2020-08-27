@@ -1,7 +1,10 @@
-import '../styles/globals.css'
-
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import "bootstrap/dist/css/bootstrap.min.css"
+import React from 'react';
+const _app = ({Component,pageProps}) => {
+  return (
+        <Component {...pageProps}/>
+  );
 }
 
-export default MyApp
+export default _app;
+
