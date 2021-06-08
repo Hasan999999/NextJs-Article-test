@@ -18,6 +18,8 @@ export default function admin() {
   };
   return (
     //2222333344444
+
+    //2
     <div>
       <Navbar />
       <div className="row mt-4">
