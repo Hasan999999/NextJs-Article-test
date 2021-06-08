@@ -18,12 +18,10 @@ export default function admin() {
   };
   return (
     //2222333344444
-<<<<<<< HEAD
-
+    //1
     //2
-=======
     //3
->>>>>>> a8c183a339ea098d3c8f2ea3a02593146b343f7f
+    //4
     <div>
       <Navbar />
       <div className="row mt-4">
